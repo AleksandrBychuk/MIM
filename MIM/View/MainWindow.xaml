@@ -1,0 +1,90 @@
+﻿<Window x:Class="MIM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:MIM" 
+        xmlns:viewmodel="clr-namespace:MIM.ViewModel"
+        mc:Ignorable="d" Height="720" Width="1280" ResizeMode="NoResize" Topmost="True" WindowStyle="None">
+    <Window.DataContext>
+        <viewmodel:MainViewModel></viewmodel:MainViewModel>
+    </Window.DataContext>
+        <Grid>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="Black">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="Fullscreen"></materialDesign:PackIcon>
+                </Button>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="Remove"></materialDesign:PackIcon>
+                </Button>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding CloseApp}">
+                    <materialDesign:PackIcon Kind="Close"></materialDesign:PackIcon>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
+                        <materialDesign:PackIcon Kind="SkipPrevious" Height="35" Width="40"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
+                        <materialDesign:PackIcon Kind="PlayArrow" Height="35" Width="40"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
+                        <materialDesign:PackIcon Kind="SkipNext" Height="35" Width="40"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
+                        <materialDesign:PackIcon Kind="Headset" Height="35" Width="40"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
+                        <materialDesign:PackIcon Kind="KeyboardVoice" Height="35" Width="40"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Slider Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" Foreground="#DD2300FF" />
+                </Grid>
+                <Grid>
+                    <Slider Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" Foreground="#DD2300FF" />
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <ListBox>
+                
+            </ListBox>
+        </Grid>
+        <Grid Grid.Row="3">
+            <StackPanel Orientation="Horizontal">
+                <Grid Height="60">
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="60">
+                        <materialDesign:PackIcon Kind="Plus" Height="55" Width="25"/>
+                    </Button>
+                </Grid>
+                <Grid Height="60">
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="60">
+                        <materialDesign:PackIcon Kind="Minus" Height="55" Width="25"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
