@@ -7,47 +7,29 @@ namespace MIM.Commands
 {
     class DelegateCommand : ICommand
     {
-        Action<object> execute;
-        Func<object, bool> canExecute;
+        private Action<object> execute;
+        private Func<object, bool> canExecute;
 
-        // Событие, необходимое для ICommand
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
-        // Два конструктора
-        public DelegateCommand(Action<object> execute, Func<object, bool> canExecute)
+        public DelegateCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             this.execute = execute;
             this.canExecute = canExecute;
         }
 
-        public DelegateCommand(Action<object> execute)
+        public bool CanExecute(object parameter)
         {
-            this.execute = execute;
-            this.canExecute = this.AlwaysCanExecute;
+            return this.canExecute == null || this.canExecute(parameter);
         }
 
-        // Методы, необходимые для ICommand
-        public void Execute(object param)
+        public void Execute(object parameter)
         {
-            execute(param);
-        }
-
-        public bool CanExecute(object param)
-        {
-            return canExecute(param);
-        }
-
-        // Метод, необходимый для IDelegateCommand
-        public void RaiseCanExecuteChanged()
-        {
-            if (CanExecuteChanged != null)
-                CanExecuteChanged(this, EventArgs.Empty);
-        }
-
-        // Метод CanExecute по умолчанию
-        private bool AlwaysCanExecute(object param)
-        {
-            return true;
+            this.execute(parameter);
         }
     }
 }

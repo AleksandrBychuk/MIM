@@ -24,5 +24,10 @@ namespace MIM
         {
             InitializeComponent();
         }
+
+        private void GridMain_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }

@@ -6,11 +6,11 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:MIM" 
         xmlns:viewmodel="clr-namespace:MIM.ViewModel"
-        mc:Ignorable="d" Height="720" Width="1280" ResizeMode="NoResize" Topmost="True" WindowStyle="None">
+        mc:Ignorable="d" Height="720" Width="1280" ResizeMode="NoResize" WindowStyle="None">
     <Window.DataContext>
         <viewmodel:MainViewModel></viewmodel:MainViewModel>
     </Window.DataContext>
-        <Grid>
+    <Grid>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -19,12 +19,12 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="Black">
+        <Grid x:Name="GridMain" Grid.Row="0" Background="Black" MouseLeftButtonDown="GridMain_MouseLeftButtonDown">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Background="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="Fullscreen"></materialDesign:PackIcon>
                 </Button>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding MinimizeApp}">
                     <materialDesign:PackIcon Kind="Remove"></materialDesign:PackIcon>
                 </Button>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding CloseApp}">
@@ -32,55 +32,63 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="#FFDEDEDE">
             <StackPanel Orientation="Horizontal">
                 <Grid>
-                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD463D7C" Height="75">
                         <materialDesign:PackIcon Kind="SkipPrevious" Height="35" Width="40"/>
                     </Button>
                 </Grid>
                 <Grid>
-                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
-                        <materialDesign:PackIcon Kind="PlayArrow" Height="35" Width="40"/>
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD463D7C" Height="75" Command="{Binding PlayMusic}" CommandParameter="{Binding SelectedMusic}">
+                        <materialDesign:PackIcon Kind="{Binding IconPlay}" Height="35" Width="40"/>
                     </Button>
                 </Grid>
                 <Grid>
-                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD463D7C" Height="75">
                         <materialDesign:PackIcon Kind="SkipNext" Height="35" Width="40"/>
                     </Button>
                 </Grid>
                 <Grid>
-                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD463D7C" Height="75">
                         <materialDesign:PackIcon Kind="Headset" Height="35" Width="40"/>
                     </Button>
                 </Grid>
                 <Grid>
-                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="75">
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD463D7C" Height="75">
                         <materialDesign:PackIcon Kind="KeyboardVoice" Height="35" Width="40"/>
                     </Button>
                 </Grid>
                 <Grid>
-                    <Slider Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" Foreground="#DD2300FF" />
+                    <Slider Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" Foreground="#DD463D7C" />
                 </Grid>
                 <Grid>
-                    <Slider Value="0" Minimum="0" Maximum="100" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" Foreground="#DD2300FF" />
+                    <Slider Minimum="0" Maximum="1" SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" Foreground="#DD463D7C"/>
                 </Grid>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2">
-            <ListBox>
-                
+            <ListBox ItemsSource="{Binding Musics}" SelectedItem="{Binding SelectedMusic}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Id}" />
+                            <TextBlock FontSize="18" Text="{Binding Path=Name}" />
+                            <TextBlock Text="{Binding Path=Lenght}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3" Background="#FFDEDEDE">
             <StackPanel Orientation="Horizontal">
                 <Grid Height="60">
-                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="60">
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD463D7C" Height="60" Command="{Binding AddMusic}">
                         <materialDesign:PackIcon Kind="Plus" Height="55" Width="25"/>
                     </Button>
                 </Grid>
                 <Grid Height="60">
-                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD2300FF" Height="60">
+                    <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DD463D7C" Height="60" Command="{Binding DeleteMusic}" CommandParameter="{Binding SelectedMusic}">
                         <materialDesign:PackIcon Kind="Minus" Height="55" Width="25"/>
                     </Button>
                 </Grid>
